@@ -1,3 +1,13 @@
-require("maxz.remap")
 require("maxz.set")
-require("maxz.packer")
+require("maxz.remap")
+require("maxz.lazy_init")
+
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+

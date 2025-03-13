@@ -20,6 +20,6 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "80"
-vim.cmd.colorscheme('onedark')
-vim.opt.background = 'dark'
+-- vim.cmd.colorscheme('onedark')
+-- vim.opt.background = 'dark'
 
