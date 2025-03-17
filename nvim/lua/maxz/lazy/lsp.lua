@@ -31,7 +31,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
+                "lua_ls", "pyright"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -70,11 +70,25 @@ return {
                         }
                     }
                 end,
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pyright.setup {
+                        capabilities = capabilities,
+                        settings = {
+                          python = {
+                            analysis = {
+                              autoSearchPaths = true,
+                              diagnosticMode = "workspace",
+                              useLibraryCodeForTypes = true
+                            }
+                          }
+                        }
+                    }
+                end,
             }
         })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -84,8 +98,9 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<C-e>'] = cmp.mapping.close(),
+                ['<C-l>'] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
