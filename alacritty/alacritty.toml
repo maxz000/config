@@ -1,0 +1,13 @@
+[window]
+padding = { x = 5, y = 5 }
+decorations = "Full"
+startup_mode = "Maximized"
+
+[scrolling]
+history = 100000
+
+[font]
+size = 16
+
+[bell]
+command = "None"
