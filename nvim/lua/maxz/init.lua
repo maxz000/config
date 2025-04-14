@@ -17,8 +17,15 @@ local MaxzGroup = vim.api.nvim_create_augroup('maxz', {})
 vim.api.nvim_create_autocmd('LspAttach', {
     group = MaxzGroup,
     callback = function(e)
+        --  "grn" is mapped in Normal mode to vim.lsp.buf.rename()
+        --  "gra" is mapped in Normal and Visual mode to vim.lsp.buf.code_action()
+        --  "grr" is mapped in Normal mode to vim.lsp.buf.references()
+        --  "gri" is mapped in Normal mode to vim.lsp.buf.implementation()
+        --  "gO" is mapped in Normal mode to vim.lsp.buf.document_symbol()
+        --  CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
