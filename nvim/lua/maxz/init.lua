@@ -1,6 +1,6 @@
 require("maxz.set")
 require("maxz.remap")
-require("maxz.lazy_init")
+require("maxz.pack_init")
 
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -38,9 +38,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
-function R(name)
-    require("plenary.reload").reload_module(name)
-end
+-- function R(name)
+--     require("plenary.reload").reload_module(name)
+-- end
 
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
     group = MaxzGroup,
